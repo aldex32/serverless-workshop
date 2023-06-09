@@ -22,6 +22,7 @@
         "@middy/core": "^4.4.1",
         "@middy/http-json-body-parser": "^4.4.1",
         "@middy/input-output-logger": "^4.4.1",
+        "aws-xray-sdk": "^3.5.0",
         "axios": "^1.4.0",
         "type-fest": "^3.10.0"
     },

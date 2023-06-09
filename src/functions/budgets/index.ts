@@ -27,6 +27,7 @@ export const createBudget = {
         },
     ],
     iamRoleStatementsName: '${self:provider.stage}-create-budget',
+    iamRoleStatementsInherit: true,
     iamRoleStatements: [
         {
             Effect: 'Allow',
@@ -59,6 +60,7 @@ export const findBudgetById = {
         },
     ],
     iamRoleStatementsName: '${self:provider.stage}-read-budget',
+    iamRoleStatementsInherit: true,
     iamRoleStatements: [
         {
             Effect: 'Allow',
@@ -83,6 +85,7 @@ export const findBudgets = {
         },
     ],
     iamRoleStatementsName: '${self:provider.stage}-read-budgets',
+    iamRoleStatementsInherit: true,
     iamRoleStatements: [
         {
             Effect: 'Allow',
@@ -107,6 +110,7 @@ export const updateBudget = {
         },
     ],
     iamRoleStatementsName: '${self:provider.stage}-update-budget',
+    iamRoleStatementsInherit: true,
     iamRoleStatements: [
         {
             Effect: 'Allow',
@@ -131,6 +135,7 @@ export const deleteBudgetById = {
         },
     ],
     iamRoleStatementsName: '${self:provider.stage}-delete-budget',
+    iamRoleStatementsInherit: true,
     iamRoleStatements: [
         {
             Effect: 'Allow',
@@ -154,6 +159,7 @@ export const processBudget = {
         },
     ],
     iamRoleStatementsName: '${self:provider.stage}-process-budget',
+    iamRoleStatementsInherit: true,
     iamRoleStatements: [
         {
             Effect: 'Allow',

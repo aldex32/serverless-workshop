@@ -8,9 +8,10 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from 'aws-lambda
 import inputOutputLogger from '@middy/input-output-logger';
 import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge';
 import { Budget, BudgetEvent } from '@libs/models';
+import { captureAWSv3Client } from 'aws-xray-sdk';
 
 const budgetTable = new BudgetRepository(process.env['BUDGET_TABLE_NAME']);
-const eventBridgeClient = new EventBridgeClient({ region: process.env['AWS_REGION'] ?? 'eu-west-1' });
+const eventBridgeClient = captureAWSv3Client(new EventBridgeClient({ region: process.env['AWS_REGION'] ?? 'eu-west-1' }));
 
 const createBudgetHandler: ValidatedEventAPIGatewayProxyEvent<typeof createBudgetSchema> = async (event) => {
     console.log(`Request context: ${JSON.stringify(event.requestContext)}`);

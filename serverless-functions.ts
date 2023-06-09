@@ -14,6 +14,17 @@ const serverlessConfiguration: AWS = {
             minimumCompressionSize: 1024,
             shouldStartNameWithService: true,
         },
+        iamRoleStatements: [
+            {
+                Effect: 'Allow',
+                Action: ['xray:PutTelemetryRecords', 'xray:PutTraceSegments'],
+                Resource: ['*'],
+            },
+        ],
+        tracing: {
+            apiGateway: true,
+            lambda: true,
+        },
         environment: {
             BUDGET_TABLE_NAME: '${self:provider.stage}-budget',
             AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',

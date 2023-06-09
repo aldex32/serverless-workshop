@@ -3,6 +3,7 @@ import { DynamoDBClient, ReturnValue } from '@aws-sdk/client-dynamodb';
 import { Instant } from '@js-joda/core';
 import * as crypto from 'crypto';
 import { Budget, BudgetStatus } from '@libs/models';
+import { captureAWSv3Client } from 'aws-xray-sdk';
 
 export type BudgetCreate = Omit<Budget, 'id' | 'createdAt'>;
 
@@ -10,7 +11,7 @@ export class BudgetRepository {
     private readonly dynamoDBDocument: DynamoDBDocument;
 
     constructor(private readonly tableName: string) {
-        this.dynamoDBDocument = DynamoDBDocument.from(new DynamoDBClient({ region: process.env['AWS_REGION'] ?? 'eu-west-1' }), {
+        this.dynamoDBDocument = DynamoDBDocument.from(captureAWSv3Client(new DynamoDBClient({ region: process.env['AWS_REGION'] ?? 'eu-west-1' })), {
             marshallOptions: { removeUndefinedValues: true },
         });
     }

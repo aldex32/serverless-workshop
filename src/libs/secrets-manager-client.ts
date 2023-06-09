@@ -1,11 +1,14 @@
 import { GetSecretValueCommand, SecretsManagerClient as AwsSecretsManagerClient } from '@aws-sdk/client-secrets-manager';
+import { captureAWSv3Client } from 'aws-xray-sdk';
 
 export class SecretsManagerClient {
     private static instance: SecretsManagerClient;
 
     private _financeAppClientSecrets?: { id: string; secret: string };
 
-    private constructor(private readonly awsSecretsManagerClient = new AwsSecretsManagerClient({ region: process.env['AWS_REGION'] ?? 'eu-west-1' })) {}
+    private constructor(
+        private readonly awsSecretsManagerClient = captureAWSv3Client(new AwsSecretsManagerClient({ region: process.env['AWS_REGION'] ?? 'eu-west-1' })),
+    ) {}
 
     static getInstance(): SecretsManagerClient {
         this.instance ??= new SecretsManagerClient();

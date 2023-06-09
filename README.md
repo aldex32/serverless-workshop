@@ -35,16 +35,19 @@ npm install --global yarn
 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
 For mac users:
+
 ```shell
 brew install awscli
 ```
 
 Configuring AWS CLI will be done during the workshop, so skip this step for now:
+
 ```shell
 aws configure
 ```
 
 ### Install project dependencies
+
 ```shell
 yarn
 ```
@@ -61,12 +64,13 @@ yarn deploy:infra
 yarn deploy:functions
 ```
 
-Before starting to consume the APIs, you must store `finance-app` client secrets in the secrets manager 
+Before starting to consume the APIs, you must store `finance-app` client secrets in the secrets manager
 with name `${self:provider.stage}-finance-app-client-secrets` and containing this structure:
+
 ```json
 {
-  "id":"{client_id}",
-  "secret":"{client_secret}"
+    "id": "{client_id}",
+    "secret": "{client_secret}"
 }
 ```
 
