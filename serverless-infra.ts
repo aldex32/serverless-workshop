@@ -32,6 +32,7 @@ const serverlessConfiguration: AWS = {
                     BillingMode: 'PAY_PER_REQUEST',
                 },
             },
+
             UserPool: {
                 Type: 'AWS::Cognito::UserPool',
                 Properties: {
@@ -101,6 +102,23 @@ const serverlessConfiguration: AWS = {
                     Name: '${self:provider.stage}-sytac-user-pool-arn',
                     Type: 'String',
                     Value: { 'Fn::GetAtt': ['UserPool', 'Arn'] },
+                },
+            },
+
+            BudgetNotificationSns: {
+                Type: 'AWS::SNS::Topic',
+                Properties: {
+                    TopicName: '${self:provider.stage}-budget-notification-sns',
+                    DisplayName: 'Sytac Budget',
+                },
+            },
+            BudgetNotificationEmailSubscription: {
+                Type: 'AWS::SNS::Subscription',
+                DependsOn: ['BudgetNotificationSns'],
+                Properties: {
+                    Protocol: 'email',
+                    Endpoint: 'sytac@example.com', // Put your Sytac email
+                    TopicArn: { Ref: 'BudgetNotificationSns' },
                 },
             },
         },

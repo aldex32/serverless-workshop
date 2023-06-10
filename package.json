@@ -18,6 +18,7 @@
     "dependencies": {
         "@aws-sdk/client-eventbridge": "^3.335.0",
         "@aws-sdk/client-secrets-manager": "^3.347.1",
+        "@aws-sdk/client-sns": "^3.350.0",
         "@js-joda/core": "^5.5.3",
         "@middy/core": "^4.4.1",
         "@middy/http-json-body-parser": "^4.4.1",

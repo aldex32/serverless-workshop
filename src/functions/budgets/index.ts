@@ -6,6 +6,7 @@ const usernameGsiArn =
     'arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:provider.stage}-budget/index/${self:provider.stage}-budget-username';
 const userPoolArn = '${ssm:${self:custom.serverlessSsmFetch.userPoolArn}}';
 const eventBusArn = 'arn:aws:events:${self:provider.region}:${aws:accountId}:event-bus/default';
+const budgetNotificationSnsArn = 'arn:aws:sns:${self:provider.region}:${aws:accountId}:${self:provider.stage}-budget-notification-sns';
 
 export const createBudget = {
     handler: `${handlerPath(__dirname)}/http-handlers.createBudget`,
@@ -166,6 +167,11 @@ export const processBudget = {
             Action: ['secretsmanager:GetSecretValue'],
             Resource: ['arn:aws:secretsmanager:${self:provider.region}:${aws:accountId}:secret:${self:provider.stage}-finance-app-client-secrets-*'],
         },
+        {
+            Effect: 'Allow',
+            Action: ['sns:Publish'],
+            Resource: [budgetNotificationSnsArn],
+        },
     ],
     environment: {
         tokenUrl: 'https://${self:provider.stage}-budgets-api.auth.${self:provider.region}.amazoncognito.com/oauth2/token',
@@ -179,6 +185,7 @@ export const processBudget = {
                 ],
             ],
         },
+        budgetNotificationSnsArn,
         stage: '${self:provider.stage}',
     },
 };
