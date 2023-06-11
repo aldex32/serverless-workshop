@@ -1,0 +1,450 @@
+{
+	"info": {
+		"_postman_id": "00e4b762-7c92-4acb-908c-dab1937d6dc0",
+		"name": "Sytac Budget",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Budget",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "tokenName",
+							"value": "budgets-create",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "{{PORTAL_CLIENT_ID}}",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "{{COGNITO_AUTH_ENDPOINT}}",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "{{COGNITO_TOKEN_ENDPOINT}}",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "budgets-api/write ",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://www.example.com/callback",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "eyJraWQiOiJYVFhIWUkxUWxnb1Ntd3dMOFptek0rek41WFV3ME9ONE53bUhEOWd2amlFPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIxaXR2cmR0NDNmbWwyMWdyamNrY2Q5YnFicyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiY2FwYWNpdHlcL3JlYWQgcmVzZXJ2YXRpb25zXC9yZWFkIHJlc2VydmF0aW9uc1wvd3JpdGUiLCJhdXRoX3RpbWUiOjE2NTA4Nzg0MjgsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbVwvZXUtd2VzdC0xX1dJVzBlTzhsOSIsImV4cCI6MTY1MDg4MjAyOCwiaWF0IjoxNjUwODc4NDI4LCJ2ZXJzaW9uIjoyLCJqdGkiOiIyZjQzNGFkYi05YjhlLTQzMzctYTM3NS1hZWQxNmE4OGFlMjEiLCJjbGllbnRfaWQiOiIxaXR2cmR0NDNmbWwyMWdyamNrY2Q5YnFicyJ9.mQuqUTxi92sJVPfOyQcmwTgCxYiwqkdMqrRi_RdBkPSwMx6zmomz_VR0vZTrCQHp17WjIMwiLeDIMSWdf5RmGRRvOkBtNS4CaEm_Eil8RPOcLR-IHvkCdNPuj6PZIgwLgjmu1MH-If6wB-aKbRs3O7Foj2YB-yzfjK7e-y_tTOBG6Px5uUBtkphjFCpwv5XWV-vYKrgcNWPQc00lokVY-Da9J6FH_ozpNHRnTUwotThBLQRaG7f6_xFllmbw58VlUj9nEqZRs4NIjsNchVpkfNWxp8Vz8Wh80ArLL6vcGWLTCv3QHLCFJ3PbvQqQUs69t5SYi8QNlhYPVpf8MAanQQ",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 10,\n    \"description\": \"Tech budget\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/budgets",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"budgets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Budget",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "budgets-api/read",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "budgets-get",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "{{PORTAL_CLIENT_ID}}",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "{{COGNITO_AUTH_ENDPOINT}}",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "{{COGNITO_TOKEN_ENDPOINT}}",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://www.example.com/callback",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "eyJraWQiOiJYVFhIWUkxUWxnb1Ntd3dMOFptek0rek41WFV3ME9ONE53bUhEOWd2amlFPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIxaXR2cmR0NDNmbWwyMWdyamNrY2Q5YnFicyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiY2FwYWNpdHlcL3JlYWQgcmVzZXJ2YXRpb25zXC9yZWFkIHJlc2VydmF0aW9uc1wvd3JpdGUiLCJhdXRoX3RpbWUiOjE2NTA4Nzg0MjgsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbVwvZXUtd2VzdC0xX1dJVzBlTzhsOSIsImV4cCI6MTY1MDg4MjAyOCwiaWF0IjoxNjUwODc4NDI4LCJ2ZXJzaW9uIjoyLCJqdGkiOiIyZjQzNGFkYi05YjhlLTQzMzctYTM3NS1hZWQxNmE4OGFlMjEiLCJjbGllbnRfaWQiOiIxaXR2cmR0NDNmbWwyMWdyamNrY2Q5YnFicyJ9.mQuqUTxi92sJVPfOyQcmwTgCxYiwqkdMqrRi_RdBkPSwMx6zmomz_VR0vZTrCQHp17WjIMwiLeDIMSWdf5RmGRRvOkBtNS4CaEm_Eil8RPOcLR-IHvkCdNPuj6PZIgwLgjmu1MH-If6wB-aKbRs3O7Foj2YB-yzfjK7e-y_tTOBG6Px5uUBtkphjFCpwv5XWV-vYKrgcNWPQc00lokVY-Da9J6FH_ozpNHRnTUwotThBLQRaG7f6_xFllmbw58VlUj9nEqZRs4NIjsNchVpkfNWxp8Vz8Wh80ArLL6vcGWLTCv3QHLCFJ3PbvQqQUs69t5SYi8QNlhYPVpf8MAanQQ",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/budgets/34d6b415-089f-448c-bc3f-d5656fd809c6",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"budgets",
+						"34d6b415-089f-448c-bc3f-d5656fd809c6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Budget",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "scope",
+							"value": "budgets-api/write",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "budgets-delete",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "{{PORTAL_CLIENT_ID}}",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "{{COGNITO_AUTH_ENDPOINT}}",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "{{COGNITO_TOKEN_ENDPOINT}}",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://www.example.com/callback",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "eyJraWQiOiJYVFhIWUkxUWxnb1Ntd3dMOFptek0rek41WFV3ME9ONE53bUhEOWd2amlFPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIxaXR2cmR0NDNmbWwyMWdyamNrY2Q5YnFicyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiY2FwYWNpdHlcL3JlYWQgcmVzZXJ2YXRpb25zXC9yZWFkIHJlc2VydmF0aW9uc1wvd3JpdGUiLCJhdXRoX3RpbWUiOjE2NTA4Nzg0MjgsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbVwvZXUtd2VzdC0xX1dJVzBlTzhsOSIsImV4cCI6MTY1MDg4MjAyOCwiaWF0IjoxNjUwODc4NDI4LCJ2ZXJzaW9uIjoyLCJqdGkiOiIyZjQzNGFkYi05YjhlLTQzMzctYTM3NS1hZWQxNmE4OGFlMjEiLCJjbGllbnRfaWQiOiIxaXR2cmR0NDNmbWwyMWdyamNrY2Q5YnFicyJ9.mQuqUTxi92sJVPfOyQcmwTgCxYiwqkdMqrRi_RdBkPSwMx6zmomz_VR0vZTrCQHp17WjIMwiLeDIMSWdf5RmGRRvOkBtNS4CaEm_Eil8RPOcLR-IHvkCdNPuj6PZIgwLgjmu1MH-If6wB-aKbRs3O7Foj2YB-yzfjK7e-y_tTOBG6Px5uUBtkphjFCpwv5XWV-vYKrgcNWPQc00lokVY-Da9J6FH_ozpNHRnTUwotThBLQRaG7f6_xFllmbw58VlUj9nEqZRs4NIjsNchVpkfNWxp8Vz8Wh80ArLL6vcGWLTCv3QHLCFJ3PbvQqQUs69t5SYi8QNlhYPVpf8MAanQQ",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/budgets/34d6b415-089f-448c-bc3f-d5656fd809c6",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"budgets",
+						"34d6b415-089f-448c-bc3f-d5656fd809c6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Budgets",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "tokenName",
+							"value": "budgets-get-all",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "budgets-api/read",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "{{PORTAL_CLIENT_ID}}",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "{{COGNITO_AUTH_ENDPOINT}}",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "{{COGNITO_TOKEN_ENDPOINT}}",
+							"type": "string"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://www.example.com/callback",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "eyJraWQiOiJYVFhIWUkxUWxnb1Ntd3dMOFptek0rek41WFV3ME9ONE53bUhEOWd2amlFPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIxaXR2cmR0NDNmbWwyMWdyamNrY2Q5YnFicyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiY2FwYWNpdHlcL3JlYWQgcmVzZXJ2YXRpb25zXC9yZWFkIHJlc2VydmF0aW9uc1wvd3JpdGUiLCJhdXRoX3RpbWUiOjE2NTA4Nzg0MjgsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbVwvZXUtd2VzdC0xX1dJVzBlTzhsOSIsImV4cCI6MTY1MDg4MjAyOCwiaWF0IjoxNjUwODc4NDI4LCJ2ZXJzaW9uIjoyLCJqdGkiOiIyZjQzNGFkYi05YjhlLTQzMzctYTM3NS1hZWQxNmE4OGFlMjEiLCJjbGllbnRfaWQiOiIxaXR2cmR0NDNmbWwyMWdyamNrY2Q5YnFicyJ9.mQuqUTxi92sJVPfOyQcmwTgCxYiwqkdMqrRi_RdBkPSwMx6zmomz_VR0vZTrCQHp17WjIMwiLeDIMSWdf5RmGRRvOkBtNS4CaEm_Eil8RPOcLR-IHvkCdNPuj6PZIgwLgjmu1MH-If6wB-aKbRs3O7Foj2YB-yzfjK7e-y_tTOBG6Px5uUBtkphjFCpwv5XWV-vYKrgcNWPQc00lokVY-Da9J6FH_ozpNHRnTUwotThBLQRaG7f6_xFllmbw58VlUj9nEqZRs4NIjsNchVpkfNWxp8Vz8Wh80ArLL6vcGWLTCv3QHLCFJ3PbvQqQUs69t5SYi8QNlhYPVpf8MAanQQ",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/budgets",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"budgets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Budget",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientSecret",
+							"value": "{{FINANCE_CLIENT_SECRET}}",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "{{FINANCE_CLIENT_ID}}",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "budgets-api/update",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "budgets",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "eyJraWQiOiJYVFhIWUkxUWxnb1Ntd3dMOFptek0rek41WFV3ME9ONE53bUhEOWd2amlFPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIxaXR2cmR0NDNmbWwyMWdyamNrY2Q5YnFicyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiY2FwYWNpdHlcL3JlYWQgcmVzZXJ2YXRpb25zXC9yZWFkIHJlc2VydmF0aW9uc1wvd3JpdGUiLCJhdXRoX3RpbWUiOjE2NTA4Nzg0MjgsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbVwvZXUtd2VzdC0xX1dJVzBlTzhsOSIsImV4cCI6MTY1MDg4MjAyOCwiaWF0IjoxNjUwODc4NDI4LCJ2ZXJzaW9uIjoyLCJqdGkiOiIyZjQzNGFkYi05YjhlLTQzMzctYTM3NS1hZWQxNmE4OGFlMjEiLCJjbGllbnRfaWQiOiIxaXR2cmR0NDNmbWwyMWdyamNrY2Q5YnFicyJ9.mQuqUTxi92sJVPfOyQcmwTgCxYiwqkdMqrRi_RdBkPSwMx6zmomz_VR0vZTrCQHp17WjIMwiLeDIMSWdf5RmGRRvOkBtNS4CaEm_Eil8RPOcLR-IHvkCdNPuj6PZIgwLgjmu1MH-If6wB-aKbRs3O7Foj2YB-yzfjK7e-y_tTOBG6Px5uUBtkphjFCpwv5XWV-vYKrgcNWPQc00lokVY-Da9J6FH_ozpNHRnTUwotThBLQRaG7f6_xFllmbw58VlUj9nEqZRs4NIjsNchVpkfNWxp8Vz8Wh80ArLL6vcGWLTCv3QHLCFJ3PbvQqQUs69t5SYi8QNlhYPVpf8MAanQQ",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "{{COGNITO_TOKEN_ENDPOINT}}",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"approved\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/budgets/34d6b415-089f-448c-bc3f-d5656fd809c6",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"budgets",
+						"34d6b415-089f-448c-bc3f-d5656fd809c6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
