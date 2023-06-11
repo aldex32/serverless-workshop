@@ -3,8 +3,12 @@ import inputOutputLogger from '@middy/input-output-logger';
 import { BudgetEvent, BudgetStatus } from '@libs/models';
 import { SecretsManagerClient } from '@libs/secrets-manager-client';
 import { SnsClient } from '@libs/sns-client';
+import { captureHTTPsGlobal } from 'aws-xray-sdk';
 
-const axios = require('axios').default;
+// Tracing HTTP calls with X-Ray
+captureHTTPsGlobal(require('https'));
+
+const axios = require('axios');
 
 const secretsManagerClient = new SecretsManagerClient();
 const snsClient = new SnsClient(process.env.budgetNotificationSnsArn);
