@@ -6,12 +6,11 @@ import middyJsonBodyParser from '@middy/http-json-body-parser';
 import { BudgetCreate, BudgetRepository } from '@libs/repositories/budget-repository';
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from 'aws-lambda';
 import inputOutputLogger from '@middy/input-output-logger';
-import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge';
 import { Budget, BudgetEvent } from '@libs/models';
-import { captureAWSv3Client } from 'aws-xray-sdk';
+import { EventBridgeClient } from '@libs/event-bridge-client';
 
 const budgetTable = new BudgetRepository(process.env['BUDGET_TABLE_NAME']);
-const eventBridgeClient = captureAWSv3Client(new EventBridgeClient({ region: process.env['AWS_REGION'] ?? 'eu-west-1' }));
+const eventBridgeClient = new EventBridgeClient(`${process.env.stage}-budgets.sytac.io`);
 
 const createBudgetHandler: ValidatedEventAPIGatewayProxyEvent<typeof createBudgetSchema> = async (event) => {
     console.log(`Request context: ${JSON.stringify(event.requestContext)}`);
@@ -28,17 +27,7 @@ const createBudgetHandler: ValidatedEventAPIGatewayProxyEvent<typeof createBudge
         status: 'pending',
         amount: budget.amount,
     };
-    await eventBridgeClient.send(
-        new PutEventsCommand({
-            Entries: [
-                {
-                    Source: `${process.env.stage}-budgets.sytac.io`,
-                    DetailType: 'BUDGET_REQUEST_CREATED',
-                    Detail: JSON.stringify(budgetEvent),
-                },
-            ],
-        }),
-    );
+    await eventBridgeClient.send('BUDGET_REQUEST_CREATED', budgetEvent);
 
     return createdResponse(toHttpBudgetResponse(budget));
 };
