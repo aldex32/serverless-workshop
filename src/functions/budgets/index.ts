@@ -4,7 +4,7 @@ import { handlerPath } from '@libs/handler-resolver';
 const tableNameArn = 'arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:provider.stage}-budget';
 const usernameGsiArn =
     'arn:aws:dynamodb:${self:provider.region}:${aws:accountId}:table/${self:provider.stage}-budget/index/${self:provider.stage}-budget-username';
-const userPoolArn = '${ssm:${self:custom.serverlessSsmFetch.userPoolArn}}';
+const userPoolArn = '${ssm:${self:provider.stage}-sytac-user-pool-arn}';
 const eventBusArn = 'arn:aws:events:${self:provider.region}:${aws:accountId}:event-bus/default';
 const budgetNotificationSnsArn = 'arn:aws:sns:${self:provider.region}:${aws:accountId}:${self:provider.stage}-budget-notification-sns';
 

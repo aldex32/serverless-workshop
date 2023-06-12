@@ -4,7 +4,7 @@ import { createBudget, deleteBudgetById, findBudgetById, findBudgets, processBud
 const serverlessConfiguration: AWS = {
     service: 'serverless-workshop-api',
     frameworkVersion: '3',
-    plugins: ['serverless-esbuild', 'serverless-ssm-fetch', 'serverless-iam-roles-per-function'],
+    plugins: ['serverless-esbuild', 'serverless-iam-roles-per-function'],
     provider: {
         name: 'aws',
         region: 'eu-west-1',
@@ -34,10 +34,6 @@ const serverlessConfiguration: AWS = {
     functions: { createBudget, findBudgetById, findBudgets, updateBudget, deleteBudgetById, processBudget },
     package: { individually: true },
     custom: {
-        // TODO is this needed?
-        serverlessSsmFetch: {
-            userPoolArn: '${self:provider.stage}-sytac-user-pool-arn',
-        },
         esbuild: {
             bundle: true,
             minify: false,
