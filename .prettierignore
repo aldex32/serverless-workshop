@@ -4,4 +4,5 @@
 /.serverless/
 /dist/
 /tmp/
+/misc/postman
 yarn.lock

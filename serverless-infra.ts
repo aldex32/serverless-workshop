@@ -6,7 +6,7 @@ const serverlessConfiguration: AWS = {
     provider: {
         name: 'aws',
         region: 'eu-west-1',
-        stage: '${opt:stage, "dev"}', // everyone should set its own stage name
+        stage: 'aldo', // everyone should set its own stage name
         runtime: 'nodejs18.x',
         deploymentBucket: { blockPublicAccess: true },
     },

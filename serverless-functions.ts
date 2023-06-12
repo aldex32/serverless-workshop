@@ -8,7 +8,7 @@ const serverlessConfiguration: AWS = {
     provider: {
         name: 'aws',
         region: 'eu-west-1',
-        stage: '${opt:stage, "dev"}', // everyone should set its own stage name
+        stage: 'aldo', // everyone should set its own stage name
         runtime: 'nodejs18.x',
         apiGateway: {
             minimumCompressionSize: 1024,
@@ -27,7 +27,6 @@ const serverlessConfiguration: AWS = {
         },
         environment: {
             BUDGET_TABLE_NAME: '${self:provider.stage}-budget',
-            AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
             NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
         },
         deploymentBucket: { blockPublicAccess: true },

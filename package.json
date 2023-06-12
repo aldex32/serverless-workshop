@@ -7,10 +7,10 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "prettier:check": "prettier --check .",
         "prettier:fix": "prettier --write .",
-        "deploy:infra": "yarn sls deploy -c serverless-infra.ts",
-        "deploy:functions": "yarn sls deploy -c serverless-functions.ts",
-        "remove:functions": "yarn sls remove -c serverless-functions.ts",
-        "remove:infra": "yarn sls remove -c serverless-infra.ts"
+        "deploy:infra": "AWS_PROFILE=sytac-workshop yarn sls deploy -c serverless-infra.ts",
+        "deploy:functions": "AWS_PROFILE=sytac-workshop yarn sls deploy -c serverless-functions.ts",
+        "remove:functions": "AWS_PROFILE=sytac-workshop yarn sls remove -c serverless-functions.ts",
+        "remove:infra": "AWS_PROFILE=sytac-workshop yarn sls remove -c serverless-infra.ts"
     },
     "engines": {
         "node": ">=14.15.0"

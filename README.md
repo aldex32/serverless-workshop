@@ -4,15 +4,17 @@ This project is a simplified Sytac budget management service implemented using A
 
 It consists of CRUD APIs exposed by API Gateway and secured and access controlled by AWS Cognito (OAuth 2.0 implementation).
 We are using two types of OAuth 2.0 grant types:
-* Authorization code grant type - for the users of Sytac web portal
-* Client credentials grant type - for the finance app
+
+-   Authorization code grant type - for the users of Sytac web portal
+-   Client credentials grant type - for the finance app
 
 The web portal user needs to signup in order to create/access budgets.
 
 The finance app is represented by `event-bridge-handlers#processBudget` function:
-* approves budget lower/equal than `€20` 
-* declines budget higher than `€300` 
-* pending for manual approval
+
+-   approves budget lower/equal than `€20`
+-   declines budget higher than `€300`
+-   pending for manual approval
 
 It sends an email notification to the owner of the budget after the budget has been processed.
 
@@ -57,7 +59,7 @@ brew install awscli
 Configuring AWS CLI will be done during the workshop, so skip this step for now:
 
 ```shell
-aws configure
+aws configure --profile sytac-workshop
 ```
 
 ### Install project dependencies
@@ -71,6 +73,7 @@ yarn
 Since this application will be deployed by the workshop attendees, we will deploy the same application in different environments,
 without interfering each other deployment and functionality. To do so, we need to change the stage property in both serverless
 config files, `serverless-infra.ts` and `serverless-functions.ts`, for example you can set your name:
+
 ```
 const serverlessConfiguration: AWS = {
     ...,
@@ -84,6 +87,7 @@ const serverlessConfiguration: AWS = {
 ```
 
 Also in order to receive budget notification email, you need to put your email in `serverless-infra.ts`:
+
 ```
 BudgetNotificationEmailSubscription: {
     Type: 'AWS::SNS::Subscription',
@@ -95,6 +99,7 @@ BudgetNotificationEmailSubscription: {
     },
 }
 ```
+
 Deployment can take around 5 minutes.
 
 ```shell
@@ -104,6 +109,9 @@ yarn deploy:infra
 # deploy functions
 yarn deploy:functions
 ```
+
+After `infra` stack has been deployed you should have received an email `AWS Notification - Subscription Confirmation`,
+then you should confirm the subscription in order to receive email notifications.
 
 Before starting to consume the APIs, you must store `finance-app` client secrets in the secrets manager
 with name `${self:provider.stage}-finance-app-client-secrets` and containing this structure:
