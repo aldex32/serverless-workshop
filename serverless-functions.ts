@@ -10,10 +10,6 @@ const serverlessConfiguration: AWS = {
         region: 'eu-west-1',
         stage: 'aldo', // everyone should set its own stage name
         runtime: 'nodejs18.x',
-        apiGateway: {
-            minimumCompressionSize: 1024,
-            shouldStartNameWithService: true,
-        },
         iamRoleStatements: [
             {
                 Effect: 'Allow',
@@ -31,7 +27,14 @@ const serverlessConfiguration: AWS = {
         },
         deploymentBucket: { blockPublicAccess: true },
     },
-    functions: { createBudget, findBudgetById, findBudgets, updateBudget, deleteBudgetById, processBudget },
+    functions: {
+        createBudget,
+        findBudgetById,
+        findBudgets,
+        updateBudget,
+        deleteBudgetById,
+        processBudget,
+    },
     package: { individually: true },
     custom: {
         esbuild: {
