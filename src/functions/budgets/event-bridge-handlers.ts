@@ -34,6 +34,7 @@ const processBudgetHandler = async ({ id, amount }: BudgetEvent) => {
 };
 
 const updateBudgetStatus = async (id: string, status: BudgetStatus) => {
+    // Ideally you should cache this secret in memory
     const financeAppClientSecrets = await secretsManagerClient.getSecret<{
         id: string;
         secret: string;

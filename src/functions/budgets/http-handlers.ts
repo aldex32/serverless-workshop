@@ -9,17 +9,16 @@ import inputOutputLogger from '@middy/input-output-logger';
 import { Budget, BudgetEvent } from '@libs/models';
 import { EventBridgeClient } from '@libs/event-bridge-client';
 
-const budgetTable = new BudgetRepository(process.env['BUDGET_TABLE_NAME']);
+const budgetRepository = new BudgetRepository(process.env['BUDGET_TABLE_NAME']);
 const eventBridgeClient = new EventBridgeClient(`${process.env.stage}-budgets.sytac.io`);
 
 const createBudgetHandler: ValidatedEventAPIGatewayProxyEvent<typeof createBudgetSchema> = async (event) => {
-    console.log(`Request context: ${JSON.stringify(event.requestContext)}`);
     const budgetCreate: BudgetCreate = {
         ...event.body,
         status: 'pending',
         username: getUsernameFromEvent(event),
     };
-    const budget = await budgetTable.create(budgetCreate);
+    const budget = await budgetRepository.create(budgetCreate);
 
     // Send the event to event bus
     const budgetEvent: BudgetEvent = {
@@ -36,7 +35,7 @@ const findBudgetByIdHandler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult
     const { id } = event.pathParameters;
     const username = getUsernameFromEvent(event);
 
-    const budget = await budgetTable.findById(id);
+    const budget = await budgetRepository.findById(id);
     if (budget?.username === username) {
         return okResponse(toHttpBudgetResponse(budget));
     }
@@ -47,7 +46,7 @@ const findBudgetByIdHandler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult
 const findBudgetsHandler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> = async (event) => {
     const username = getUsernameFromEvent(event);
 
-    const budgets = await budgetTable.findByUsername(username);
+    const budgets = await budgetRepository.findByUsername(username);
 
     return okResponse(budgets.map(toHttpBudgetResponse));
 };
@@ -55,12 +54,12 @@ const findBudgetsHandler: Handler<APIGatewayProxyEvent, APIGatewayProxyResult> =
 const updateBudgetHandler: ValidatedEventAPIGatewayProxyEvent<typeof updateBudgetSchema> = async (event) => {
     const { id } = event.pathParameters;
 
-    const budget = await budgetTable.findById(id);
+    const budget = await budgetRepository.findById(id);
     if (budget == null) {
         return notFoundResponse();
     }
 
-    const updatedBudget = await budgetTable.update(id, event.body.status);
+    const updatedBudget = await budgetRepository.update(id, event.body.status);
 
     return okResponse(toHttpBudgetResponse(updatedBudget));
 };
@@ -69,9 +68,9 @@ const deleteBudgetByIdHandler: Handler<APIGatewayProxyEvent, APIGatewayProxyResu
     const { id } = event.pathParameters;
     const username = getUsernameFromEvent(event);
 
-    const budget = await budgetTable.findById(id);
+    const budget = await budgetRepository.findById(id);
     if (budget?.username === username) {
-        await budgetTable.deleteById(id);
+        await budgetRepository.deleteById(id);
     }
 
     return noContentResponse();
@@ -105,7 +104,6 @@ export const findBudgets = middy(findBudgetsHandler) // prettier
     .use(middyJsonBodyParser());
 export const updateBudget = middy(updateBudgetHandler) // prettier
     .use(inputOutputLogger())
-    .before(printUsername)
     .use(middyJsonBodyParser());
 export const deleteBudgetById = middy(deleteBudgetByIdHandler) // prettier
     .use(inputOutputLogger())

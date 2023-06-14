@@ -7,8 +7,6 @@ export interface Budget {
     description: string;
     username: string;
     createdAt: string;
-    changedBy?: string;
-    changedAt?: string;
 }
 
 export type BudgetEvent = Pick<Budget, 'id' | 'status' | 'amount'>;

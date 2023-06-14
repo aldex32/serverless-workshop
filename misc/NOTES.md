@@ -24,12 +24,3 @@ serverless create --template aws-nodejs-typescript
 
 Do you prefer another type of project, then have a look to the templates:
 https://www.serverless.com/framework/docs/providers/aws/cli-reference/create
-
-## AWS services that we are going to use in this workshop
-
-### AWS Cognito
-
--   AWS Cognito is a service that provides Authentication and Authorization features.
--   Provides user registration, sign in and access control.
--   Highly available and scalable.
--   Supports standard based Identity Providers such as OAuth 2.0, OIDC, SAML.

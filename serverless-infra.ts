@@ -33,6 +33,7 @@ const serverlessConfiguration: AWS = {
                 },
             },
 
+            // Creates user pool (user directory)
             UserPool: {
                 Type: 'AWS::Cognito::UserPool',
                 Properties: {
@@ -52,6 +53,7 @@ const serverlessConfiguration: AWS = {
                     UserPoolId: { Ref: 'UserPool' },
                 },
             },
+            // Creates OAuth 2.0 resource server and defines custom scopes
             ResourceServer: {
                 Type: 'AWS::Cognito::UserPoolResourceServer',
                 DependsOn: ['UserPool'],
@@ -66,23 +68,25 @@ const serverlessConfiguration: AWS = {
                     ],
                 },
             },
+            // Creates user pool client with authorization code grant type for Sytac web portal.
             WebPortalAppClient: {
                 Type: 'AWS::Cognito::UserPoolClient',
                 DependsOn: ['UserPool', 'ResourceServer'],
                 Properties: {
                     ClientName: 'web-portal',
                     UserPoolId: { Ref: 'UserPool' },
+                    // Enable SRP-based authentication and auth flow to refresh tokens.
                     ExplicitAuthFlows: ['ALLOW_USER_SRP_AUTH', 'ALLOW_REFRESH_TOKEN_AUTH'],
                     SupportedIdentityProviders: ['COGNITO'],
                     GenerateSecret: false,
                     AllowedOAuthFlowsUserPoolClient: true,
                     AllowedOAuthFlows: ['code'],
                     AllowedOAuthScopes: ['budgets-api/read', 'budgets-api/write'],
-                    PreventUserExistenceErrors: 'ENABLED',
                     CallbackURLs: ['https://www.example.com/callback'],
                     LogoutURLs: ['https://www.example.com/logout'],
                 },
             },
+            // Creates user pool client with client credentials grant type for finance app.
             FinanceAppClient: {
                 Type: 'AWS::Cognito::UserPoolClient',
                 DependsOn: ['UserPool', 'ResourceServer'],
